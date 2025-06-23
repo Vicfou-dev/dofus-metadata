@@ -19,5 +19,6 @@ dofus.proto
 old
 Il2CppDumper/*
 !Il2CppDumper/Il2CppDumper*
+!Il2CppDumper/Mono*
 !Il2CppDumper/config.json
 !Il2CppDumper/protodec.exe
