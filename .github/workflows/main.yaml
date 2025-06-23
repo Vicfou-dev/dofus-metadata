@@ -124,15 +124,9 @@ jobs:
           JSON_FOLDER: json/
 
       - name: Run Il2CppDumper
-        run: |
-          try {
-            .\Il2CppDumper\Il2CppDumper.exe `
-              .\parser\temp\GameAssembly.dll `
-              .\parser\temp\Dofus_Data\il2cpp_data\Metadata\global-metadata.dat
-          } catch {
-            Write-Host "::warning::Il2CppDumper exited with an error (expected if Console.ReadKey fails)"
-          }
+        run: .\Il2CppDumper\Il2CppDumper.exe .\parser\temp\GameAssembly.dll .\parser\temp\Dofus_Data\il2cpp_data\Metadata\global-metadata.dat
         shell: pwsh
+        continue-on-error: true
 
       - name: Run protodec
         run: .\Il2CppDumper\protodec.exe .\Il2CppDumper\DummyDll .\parser\dofus.proto --include-properties-without-non-user-code-attribute
