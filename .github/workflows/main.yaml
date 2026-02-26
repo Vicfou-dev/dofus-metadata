@@ -43,8 +43,9 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          latest_version=$(gh release list --exclude-pre-releases -L 1 | cut -f 3 | sed 's/^v//')
-          echo "version=${latest_version}" >> $GITHUB_OUTPUT
+          latest_tag="$(gh release view --json tagName -q .tagName 2>/dev/null || true)"
+          latest_version="${latest_tag#v}"
+          echo "version=$latest_version" >> $GITHUB_OUTPUT
 
       - name: Determine release tag
         id: tag
